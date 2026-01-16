@@ -1,0 +1,348 @@
+/* Dark theme + hover buttons
+   Cleaned and valid CSS for the portfolio
+   Save marble texture at ./marble.jpg (optional) and adjust paths if needed */
+:root{
+  --bg-color: #070707;
+  /* If you want a marble texture, place a file named `marble.jpg` next to this CSS file
+     and set --marble-image: url('./marble.jpg'); otherwise keep it as `none` */
+  --marble-image: none;
+  --panel: rgba(10,10,12,0.75);
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.75);
+  --accent-color: #8fca76;
+  --btn-radius: 10px;
+  --transition-fast: 180ms cubic-bezier(.2,.9,.2,1);
+  --card-bg:#1c1c1c; /* light grey card background */
+  --card-text: #0b0b0b; /* dark text on cards */
+  --card-border: rgba(0,0,0,0.08);
+  --card-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  --toggle-active-bg: #1c1c1c;    /* slightly darker light grey for toggle active state */
+}
+
+/* Page background */
+html,body{
+  height:100%;
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text);
+  background-color:var(--bg-color);
+  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), var(--marble-image);
+  background-size: cover;
+  background-position: center;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Main panel container */
+.cv, .container, main {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  border-radius: 10px;
+  padding: 28px;
+}
+
+/* Section / Panel defaults: dark panels (default mode) */
+.cv section,
+.cv .left,
+.cv .right,
+.cv .about-card,
+.cv .contact,
+.cv .work-section,
+.cv .center {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 20px;
+  border-radius: 12px;
+  transition: background-color 360ms ease, color 360ms ease, border-color 360ms ease, box-shadow 360ms ease;
+}
+
+/* When body has .cards-on, switch sections/sidebars into light cards */
+body.cards-on .cv section,
+body.cards-on .cv .left,
+body.cards-on .cv .right,
+body.cards-on .cv .about-card,
+body.cards-on .cv .contact,
+body.cards-on .cv .work-section,
+body.cards-on .cv .center {
+  background: var(--card-bg);
+  color: var(--card-text);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* Ensure headings and text inside cards use the card text color only when cards-on */
+body.cards-on .cv section h1,
+body.cards-on .cv section h2,
+body.cards-on .cv section h3,
+body.cards-on .cv section h4,
+body.cards-on .cv .about-card h4,
+body.cards-on .cv .contact h3,
+body.cards-on .cv .right h3 {
+  color: var(--card-text);
+}
+
+/* Links inside cards keep accent color for visibility only when cards-on */
+body.cards-on .cv section a,
+body.cards-on .cv .about-card a,
+body.cards-on .cv .contact a,
+body.cards-on .cv .right a {
+  color: var(--accent-color);
+}
+
+/* Adjust photo border to work on light cards */
+.cv .photo-wrap .photo {
+  background: #fff; /* keep portrait frame white */
+  padding: 6px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+.cv .photo-wrap .photo img { border-radius: 50%; }
+
+/* Tweak .left list strong labels to be darker on cards */
+.left ul li strong { color: var(--card-text); }
+
+/* Ensure badges (Ai/Ps/Id) remain visible on light background */
+.badge, .btn-pill, .skill-badge { background: #111; color: #fff; }
+
+/* Headings */
+h1, h2, h3, h4 { color: var(--text); margin: 0 0 10px 0; }
+p { color: var(--muted); }
+
+/* Navigation link hover */
+nav a, .nav a { color: var(--text); text-decoration: none; transition: color var(--transition-fast), transform var(--transition-fast); }
+nav a:hover, .nav a:focus { color: var(--accent-color); transform: translateY(-3px); outline: none; }
+
+/* Card hover for images (work / gallery) */
+.card { overflow: hidden; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.035); transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+.card img { display:block; width:100%; height:100%; object-fit:cover; transition: transform 500ms ease, filter 300ms ease; }
+.card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.6); }
+.card:hover img { transform: scale(1.06); filter: brightness(0.7); }
+
+/* Button base + variants */
+.btn { display:inline-block; padding:10px 16px; border-radius:var(--btn-radius); font-weight:700; cursor:pointer; border:0; transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast); -webkit-tap-highlight-color: transparent; text-decoration:none; color:var(--text); background: transparent; }
+
+/* Primary filled button */
+.btn-primary { background: linear-gradient(180deg, var(--accent-color), #1b92e6); color: #fff; box-shadow: 0 8px 18px rgba(39,163,255,0.14); border: 1px solid rgba(255,255,255,0.06); }
+.btn-primary:hover, .btn-primary:focus { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(39,163,255,0.18); outline:none; }
+.btn-primary:active { transform: translateY(-1px) scale(.995); }
+
+/* Ghost / outline button */
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.12); }
+.btn-ghost:hover, .btn-ghost:focus { background: rgba(255,255,255,0.03); transform: translateY(-2px); outline:none; }
+
+/* Small pill-button (used in skills) */
+.btn-pill { padding:6px 10px; border-radius:999px; background: rgba(255,255,255,0.95); color:#000; font-weight:800; font-size:13px; border:1px solid rgba(0,0,0,0.12); }
+
+/* Accessible focus ring for keyboard users */
+:focus { outline: none; }
+.btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { box-shadow: 0 0 0 4px rgba(39,163,255,0.12), 0 6px 18px rgba(0,0,0,0.6); border-radius: var(--btn-radius); outline: none; }
+
+/* Form controls (dark, matching theme) */
+input[type="text"], input[type="email"], textarea, select { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); color: var(--text); padding:10px 12px; border-radius:8px; width:100%; transition: border-color var(--transition-fast), box-shadow var(--transition-fast); }
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.45); }
+input:focus, textarea:focus, select:focus { border-color: rgba(39,163,255,0.95); box-shadow: 0 8px 24px rgba(39,163,255,0.08); outline:none; }
+
+/* Contact card small tweaks */
+.contact, .about-card { background: var(--panel); border-radius:10px; padding:14px; border:1px solid rgba(255,255,255,0.03); }
+
+/* When cards are enabled (body.cards-on), make contact/about cards light */
+body.cards-on .contact, body.cards-on .about-card {
+  background: var(--card-bg) !important;
+  color: var(--card-text) !important;
+  border: 1px solid var(--card-border);
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+}
+
+/* When cards are enabled, force headings and paragraph text inside CV cards to use dark text color */
+body.cards-on .cv section p,
+body.cards-on .cv .about-card p,
+body.cards-on .cv .contact p,
+body.cards-on .cv .left p,
+body.cards-on .cv .right p,
+body.cards-on .cv section h1,
+body.cards-on .cv section h2,
+body.cards-on .cv section h3,
+body.cards-on .cv section h4,
+body.cards-on .cv .about-card h4,
+body.cards-on .cv .contact h3,
+body.cards-on .cv .right h3 {
+  color: var(--card-text) !important;
+}
+
+/* Make sure links inside cards remain visible and use accent when cards-on */
+body.cards-on .cv section a, body.cards-on .cv .about-card a, body.cards-on .cv .contact a, body.cards-on .cv .right a { color: var(--accent-color) !important; }
+
+/* Small util: center content; helpful for right-centered area */
+.center-column { display:flex; flex-direction:column; align-items:center; justify-content:center; }
+
+/* Make the skill graph badges float and hover */
+.skill-badge { display:inline-grid; place-items:center; width:44px; height:44px; border-radius:10px; background: rgba(255,255,255,0.95); color:#000; font-weight:800; border:1px solid rgba(0,0,0,0.12); transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
+.skill-badge:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 12px 30px rgba(0,0,0,0.55); }
+
+/* Profile photo (used in center and About section) */
+.photo-wrap { display:flex; justify-content:center; align-items:center; margin:18px 0; }
+.photo-wrap .photo { width:260px; height:260px; border-radius:50%; padding:6px; background: linear-gradient(#fff,#eee); overflow:hidden; box-shadow:0 14px 40px rgba(0,0,0,0.6); }
+.photo-wrap .photo img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(0.1); }
+
+/* About section profile photo (smaller) */
+.profile-photo { width:180px; height:180px; object-fit:cover; border-radius:8px; display:block; margin:0 auto; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
+
+/* Work grid: thumbnails for art, school and graphic projects */
+.work-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; margin-top:14px; }
+.thumb { position:relative; overflow:hidden; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); min-height:160px; display:flex; align-items:center; justify-content:center; }
+.thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 350ms ease, filter 220ms ease; }
+.thumb::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.35)); opacity:0; transition:opacity 220ms ease; }
+.thumb:hover::after { opacity:1; }
+.thumb figcaption { position:absolute; left:12px; bottom:12px; color:var(--text); font-weight:700; font-family:serif; font-size:15px; opacity:0; transform:translateY(6px); transition: all 240ms ease; }
+.thumb:hover figcaption { opacity:1; transform:translateY(0); }
+
+/* Utilities and small presentational classes (moved from inline styles) */
+.date { color: var(--muted); font-size: 13px; }
+.year-note { color: var(--muted); font-size: 14px; margin-top: 4px; }
+.info-label { color: var(--accent-color); margin-right: 8px; font-weight:700; }
+.muted-text { color: var(--muted); }
+.strong-text { color: var(--text); font-weight:700; }
+.meta-small { color: var(--muted); font-size:13px; margin-top:18px; }
+.seals { margin-top:10px; display:flex; gap:12px; align-items:center; }
+
+/* About block styles */
+.about-title { margin:0 0 8px 0; font-size:18px; }
+.about-copy { color: var(--muted); margin-bottom:0.6rem; }
+
+/* Work section small helpers */
+.work-intro { color: var(--muted); margin-top:0; margin-bottom:12px; }
+.social { margin-top:14px; display:flex; gap:10px; align-items:center; }
+
+/* ensure profile-photo uses our sizing rules (overrides any inline attributes) */
+.profile-photo { width:180px; height:180px; object-fit:cover; border-radius:8px; display:block; margin:0 auto; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
+
+/* strong labels in lists align */
+.left ul li { display:flex; gap:8px; align-items:center; }
+.left ul li strong { min-width:110px; display:inline-block; }
+
+/* Header and toggle button */
+.header { position: relative; }
+.toggle-wrap { position: absolute; top: 18px; right: 140px; }
+#toggle-cards {
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 180ms ease;
+}
+#toggle-cards:hover { transform: translateY(-2px); }
+
+/* Active state when cards-on is enabled */
+body.cards-on #toggle-cards,
+#toggle-cards.active {
+  /* Make the toggle visually match the light card appearance (use dedicated toggle grey) */
+  background: var(--toggle-active-bg);
+  color: var(--card-text);
+  border-color: var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+/* Fixed contact box in the top-right corner */
+.contact.fixed-contact {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1300;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 6px 10px !important;
+  text-align: right;
+  color: #fff !important; /* force white lettering as requested */
+}
+/* make sure child icons/links also appear white */
+.contact.fixed-contact .icon,
+.contact.fixed-contact p,
+.contact.fixed-contact a,
+.contact.fixed-contact span { color: #fff !important; }
+
+/* On small screens, revert the fixed positioning to avoid overlap with header and improve layout */
+@media (max-width: 640px) {
+  .contact.fixed-contact {
+    position: static;
+    right: auto;
+    top: auto;
+    z-index: auto;
+    background: var(--panel) !important;
+    border: 1px solid rgba(255,255,255,0.03) !important;
+    box-shadow: none !important;
+    padding: 12px !important;
+    color: var(--text) !important; /* keep readable on small screens */
+  }
+  /* move toggle back to avoid layout issues */
+  .toggle-wrap { position: absolute; top: 18px; right: 18px; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .cv { padding:18px; }
+  .center-column { align-items:flex-start; }
+  nav a { font-size:15px; }
+}
+@media (max-width: 520px) {
+  .card img { transform-origin:center; }
+  .btn { padding:10px 12px; font-size:14px; }
+  .skill-badge { width:40px; height:40px; }
+}
+
+/* Single column fallback on smaller screens */
+@media (max-width: 980px) {
+  .work-grid { grid-template-columns: repeat(2, 1fr); }
+  .photo-wrap .photo { width:220px; height:220px; }
+  .profile-photo { width:140px; height:140px; }
+}
+@media (max-width: 640px) {
+  .work-grid { grid-template-columns: 1fr; }
+  .photo-wrap .photo { width:160px; height:160px; }
+  .profile-photo { width:120px; height:120px; }
+}
+
+/* spacing tweak for headings in right column */
+.right h3, .right h4 { margin-top:0; margin-bottom:10px; }
+
+/* Improve image responsiveness in content */
+img { max-width:100%; height:auto; }
+
+/* Helper class for active nav state */
+.nav-active { color: var(--accent-color); font-weight:800; text-shadow: 0 6px 20px rgba(39,163,255,0.08); }
+
+/* About card: profile layout (image left, content right) */
+.about-card--profile {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 18px;
+}
+.about-card--profile .profile-photo {
+  width: 160px;
+  height: 160px;
+  flex: 0 0 160px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+}
+.about-card--profile .about-content {
+  flex: 1 1 auto;
+}
+.about-card--profile .about-title { margin-top:0; margin-bottom:8px; }
+.about-card--profile .about-copy { margin-bottom:8px; color: var(--muted); }
+
+/* On small screens, stack the image above the text */
+@media (max-width: 760px) {
+  .about-card--profile { flex-direction: column; text-align: center; }
+  .about-card--profile .profile-photo { width:120px; height:120px; flex: 0 0 120px; }
+  .about-card--profile .about-content { width:100%; }
+}

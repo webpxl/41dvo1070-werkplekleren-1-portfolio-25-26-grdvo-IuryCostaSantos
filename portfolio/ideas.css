@@ -1,0 +1,221 @@
+/* Portfolio styles for ideas.html
+   Black / white / gray gradient, responsive, cards for projects
+*/
+:root{
+  --bg-1: #000000;
+  --bg-2: #111111;
+  --bg-3: #2b2b2b;
+  --card-bg: linear-gradient(180deg, #0f0f0f, #1a1a1a);
+  --muted: #cfcfcf;
+  --text: #ffffff;
+  --accent: #8fca76;
+  --card-radius: 12px;
+  --gap: 20px;
+  --topbar-height: 110px; /* increased header bar height to accommodate larger title */
+  --nav-height: 48px; /* navigation bar height */
+}
+
+/* Note: removed @font-face for 'Aurora' because the local font file is not present in the repo.
+   If you add a local font file, reintroduce an @font-face rule here pointing to the file. */
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color:var(--text);
+  background: linear-gradient(120deg,var(--bg-1),var(--bg-2),var(--bg-3));
+  -webkit-font-smoothing:antialiased;
+  padding-top: calc(var(--topbar-height) + var(--nav-height));
+}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+.site-header{padding:28px 0}
+.site-title{
+  /* larger, responsive title that fills more horizontal space */
+  font-family: 'Aurora', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  margin:0;
+  width:100%;
+  text-align:center;
+  font-weight:600; /* less heavy than before */
+  letter-spacing: -0.2px;
+}
+.site-sub{font-size:0.95rem;margin:0;color:var(--muted)}
+.top-nav a{color:var(--muted);margin-right:12px;text-decoration:none}
+.top-nav a:hover{color:var(--text)}
+
+.main-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)}
+.card{background:rgba(255,255,255,0.03);padding:18px;border-radius:var(--card-radius);border:1px solid rgba(255,255,255,0.04)}
+.about{grid-column:span 12}
+.projects{grid-column:span 12}
+.non-school{grid-column:span 6}
+.special{grid-column:span 6}
+.misc{grid-column:span 6}
+.contact-card{grid-column:span 6}
+
+/* About inner layout */
+.about-inner{display:flex;gap:16px;align-items:center}
+.about-photo{width:160px;height:160px;border-radius:8px;object-fit:cover;flex:0 0 160px}
+.about-text p{margin:8px 0;color:var(--muted)}
+
+.lead{color:var(--muted);margin:6px 0 14px}
+
+/* Projects grid */
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.project-card{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#101010,#161616)}
+.project-card img{width:100%;height:180px;object-fit:cover;display:block}
+.project-content{padding:12px}
+.project-content h3{margin:0 0 8px}
+.project-content .meta{font-size:0.85rem;color:var(--muted);margin-bottom:8px}
+
+/* Buttons */
+.btn{display:inline-block;padding:10px 14px;border-radius:8px;background:transparent;color:var(--text);text-decoration:none;border:1px solid rgba(255,255,255,0.08);font-weight:700}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.6)}
+.contact-actions{margin:12px 0}
+
+/* Footer */
+.site-footer{padding:28px 0;text-align:center;color:var(--muted)}
+
+/* Snackbar (confirmation) */
+.snackbar {
+  position: fixed; left:50%; bottom:24px; transform: translateX(-50%) translateY(8px); background: rgba(0,0,0,0.8); color:#fff; padding:10px 14px; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.6); opacity:0; pointer-events:none; transition: all 240ms ease; z-index:1200; font-weight:700;
+}
+.snackbar.show{ opacity:1; transform: translateX(-50%) translateY(0); pointer-events:auto; }
+
+/* small tweak for contact-btn */
+.contact-btn{background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.08)}
+
+/* Top header bar (fixed) */
+.top-bar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--topbar-height);
+  display:flex;
+  align-items:center;
+  background: linear-gradient(90deg, rgba(0,0,0,0.92), rgba(10,10,10,0.85));
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  z-index: 1100;
+}
+.top-bar .container{
+  display:flex;
+  align-items:center;
+  justify-content:center; /* center horizontally */
+  flex-direction:column;  /* stack title and subtitle vertically so the title can take full width */
+  gap:6px;
+}
+.top-bar .site-title{
+  font-family: 'Aurora', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  /* larger, responsive title that fills more horizontal space */
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  margin:0;
+  width:100%;
+  text-align:center;
+  font-weight:600; /* reduced weight for a lighter look */
+  letter-spacing: -0.2px;
+}
+.top-bar .site-sub{font-size:0.95rem;margin:0;color:var(--muted)}
+
+/* Main navigation bar (fixed under header) */
+.main-nav{
+  position: fixed;
+  top: var(--topbar-height);
+  left:0;
+  right:0;
+  height: var(--nav-height);
+  display:flex;
+  align-items:center;
+  background: rgba(0,0,0,0.78);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  z-index: 1050;
+}
+.main-nav .container{display:flex;gap:18px;align-items:center}
+.main-nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:6px}
+.main-nav a:hover, .main-nav a:focus{color:var(--text);background:rgba(255,255,255,0.02)}
+
+/* Reduce header sizes on small screens */
+@media (max-width: 640px){
+  :root{ --topbar-height:64px; --nav-height:44px; }
+  .top-bar .site-title{font-size:1rem}
+  .top-bar .site-sub{display:none}
+  body{padding-top: calc(var(--topbar-height) + var(--nav-height));}
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .projects-grid{grid-template-columns:1fr}
+  .non-school,.special,.misc,.contact-card{grid-column:span 12}
+  .about-inner{flex-direction:column;text-align:center}
+  .about-photo{margin-bottom:12px}
+}
+
+@media (max-width:520px){
+  .container{padding:12px}
+  .site-title{font-size:1.4rem}
+}
+
+/* Accessibility: focus states */
+a:focus{outline:3px solid rgba(143,202,118,0.18);outline-offset:3px;border-radius:6px}
+
+/* Right-side floating decorative image */
+.right-floating {
+  position: fixed;
+  right: 24px;
+  bottom: 110px; /* sits above footer area / lower content */
+  z-index: 1000;
+  pointer-events: none; /* purely decorative */
+}
+.right-floating img {
+  display: block;
+  width: 180px;
+  max-width: calc(20vw + 20px);
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+  opacity: 0.98;
+  transform-origin: center;
+  transition: transform 260ms ease, opacity 260ms ease;
+}
+.right-floating img:hover {
+  transform: translateY(-6px) scale(1.02);
+  opacity: 1;
+}
+
+/* Hide the floating image on smaller screens to prevent overlap */
+@media (max-width: 980px) {
+  .right-floating { display: none; }
+}
+
+/* Misc section: place misc-photo at the top-right of the card on larger screens,
+   but stack it above the text on smaller screens */
+.misc { position: relative; }
+.misc-photo {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 170px; /* updated width */
+  height: 350px; /* updated height per request */
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.55);
+  object-fit: cover;
+  display: block;
+  opacity: 0.98;
+}
+/* add right padding so the card's text doesn't flow under the image */
+@media (min-width: 981px) {
+  /* space for the resized misc-photo (170px) + some gutter */
+  .misc { padding-right: calc(170px + 32px); }
+}
+
+/* Center contact section near the bottom and keep it responsive */
+.contact-card {
+  grid-column: span 12; /* make the contact card full-width in the grid */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 48px auto 96px; /* push it down and add space before footer */
+}
+.contact-actions { display:flex; justify-content:center; }
+.contact-actions .contact-btn { margin: 0 auto; }
